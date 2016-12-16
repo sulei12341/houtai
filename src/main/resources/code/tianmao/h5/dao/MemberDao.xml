@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="code.tianmao.h5.dao.MemberDao">
+    <resultMap id="property_result" type="code.tianmao.h5.domain.Member">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="usercode" jdbcType="VARCHAR" property="usercode"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+    </resultMap>
+    <resultMap id="complete_result" extends="property_result" type="code.tianmao.h5.domain.Member">
+        <result column="created_by" jdbcType="BIGINT" property="createdBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+    </resultMap>
+
+    <sql id="query_member_where">
+        <!-- 如果 userQueryVo中传入查询条件，再进行sql拼接-->
+        <!-- test中userCustom.username表示从userQueryVo读取属性值-->
+        <if test="username!=null and username!=''">
+            and username like '%${username}%'
+        </if>
+        <if test="nickname!=null and nickname!=''">
+            and nickname like '%${nickname}%'
+        </if>
+    </sql>
+
+    <sql id="property_Column">
+    id, username, nickname, usercode, password, phone
+  </sql>
+    <sql id="complete_Column">
+    created_by, update_by, create_time, update_time
+    </sql>
+    <sql id="created_cloumn">
+        create_time, created_by
+
+    </sql>
+    <sql id="created">
+      #{createTime,jdbcType=DATE}, #{createdBy,jdbcType=BIGINT}
+    </sql>
+
+    <sql id="update_cloumn">
+        update_time, update_by
+    </sql>
+    <sql id="update">
+        #{updateTime,jdbcType=DATE}, #{updateBy,jdbcType=BIGINT}
+    </sql>
+
+    <select id="findMemberByUsername" parameterType="string" resultMap="property_result">
+        select
+        <include refid="property_Column"/>
+        , salt
+        from u_member
+        where username = #{username,jdbcType=BIGINT}
+    </select>
+
+</mapper>

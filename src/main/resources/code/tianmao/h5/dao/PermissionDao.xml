@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="code.tianmao.h5.dao.PermissionDao">
+    <resultMap id="property_result" type="code.tianmao.h5.domain.Permission">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="percode" jdbcType="VARCHAR" property="percode"/>
+        <result column="parentid" jdbcType="BIGINT" property="parentid"/>
+        <result column="parentids" jdbcType="VARCHAR" property="parentids"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="valid" jdbcType="BIT" property="valid"/>
+    </resultMap>
+
+    <sql id="property_Column">
+      id, name, type, url, percode, parentid, parentids, sort, valid
+    </sql>
+
+    <!-- 根据用户id查询菜单 -->
+    <select id="findMenuListByUserId" parameterType="long" resultType="permission">
+        SELECT
+        <include refid="property_Column"/>
+        FROM
+        sys_permission
+        WHERE TYPE = 'menu'
+        AND id IN
+        (SELECT
+        permission_id
+        FROM
+        sys_role_permission
+        WHERE role_id IN
+        (SELECT
+        role_id
+        FROM
+        sys_role_user
+        WHERE user_id = #{id}))
+    </select>
+
+
+    <!-- 根据用户id查询url -->
+    <select id="findPermissionListByUserId" parameterType="long" resultType="Permission">
+        SELECT
+        *
+        FROM
+        sys_permission
+        WHERE TYPE = 'permission'
+        AND id IN
+        (SELECT
+        permission_id
+        FROM
+        sys_role_permission
+        WHERE role_id IN
+        (SELECT
+        role_id
+        FROM
+        sys_role_user
+        WHERE user_id = #{id}))
+    </select>
+
+</mapper>

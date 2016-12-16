@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j的装配过程 -->
+<Configuration status="off" monitorInterval="1800">
+    <properties>
+        <property name="LOG_HOME">D:/logs/h5-log</property>
+        <!-- 服务器的名字 -->
+        <property name="SERVER_NAME">h5</property>
+        <!-- 服务器下模块的名字 -->
+        <property name="MODULE_NAME">tianmao</property>
+    </properties>
+    <Appenders>
+        <!-- 定义控制台输出 -->
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%file:%line] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+        </Console>
+        <RollingFile name="FILE" fileName="${LOG_HOME}/${SERVER_NAME}_${MODULE_NAME}.log" filePattern="${LOG_HOME}/backup/$${date:yyyy-MM}/${SERVER_NAME}_${MODULE_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%file:%line] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- 每1小时更新一次 -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 最多备份30个 -->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+        <RollingFile name="ERROR_FILE" fileName="${LOG_HOME}/${SERVER_NAME}_${MODULE_NAME}_error.log" filePattern="${LOG_HOME}/backup/$${date:yyyy-MM}/${SERVER_NAME}_${MODULE_NAME}-%d{yyyy-MM-dd}_error-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%file:%line] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="FILE"/>
+            <AppenderRef ref="ERROR_FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>
