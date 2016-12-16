@@ -5,7 +5,6 @@ import code.tianmao.h5.dao.PermissionDao;
 import code.tianmao.h5.domain.business.Member;
 import code.tianmao.h5.domain.sys.Permission;
 import code.tianmao.h5.dto.MemberDto;
-import code.tianmao.h5.dto.queryDto.MemberQueryDto;
 import code.tianmao.h5.service.MemberService;
 import code.tianmao.h5.utils.BeanUtilPlus;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -40,12 +39,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberDao.selectByPrimaryKey(id);
         return BeanUtilPlus.copyAs(member, MemberDto.class);
     }
-
-    @Override
-    public List<MemberDto> findMemberList(MemberQueryDto memberQueryDto) {
-        return null;
-    }
-
+    
     @Override
     public void addMember(MemberDto memberDto) {
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo();
@@ -61,11 +55,6 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
-    @Override
-    public MemberDto findMemberByUsername(String username) {
-        Member member = memberDao.findMemberByUsername(username);
-        return BeanUtilPlus.copyAs(member, MemberDto.class);
-    }
 
     @Override
     public List<Permission> findMenuListByUserId(Long userId) {
