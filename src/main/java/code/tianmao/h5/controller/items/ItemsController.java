@@ -22,7 +22,13 @@ public class ItemsController {
     @Resource
     private ItemsService itemsService;
 
-    //商品信息方法
+    /**
+     * 查询商品列表
+     *
+     * @param itemsQueryDto 查询条件
+     * @param model 模型
+     * @return 返回结果
+     */
     @RequestMapping("/findItemsPage")
     @RequiresPermissions("item:query")//执行queryItems需要"item:query"权限
     public String findItemsPage(ItemsQueryDto itemsQueryDto, Model model) throws Exception {
@@ -40,18 +46,35 @@ public class ItemsController {
         return "itemsList";
     }
 
+    /**
+     * 跳转新增页面
+     *
+     * @return 新增页面
+     */
     @RequestMapping("/addItemsInit")
     public String addItemsInit() throws Exception {
         return "editItem";
     }
 
+    /**
+     * 新增商品
+     *
+     * @param itemsDto 商品信息
+     * @return 跳转列表页面
+     */
     @RequestMapping("/addItems")
     public String addItems(ItemsDto itemsDto) throws Exception {
         itemsService.addItems(itemsDto);
         return "itemsList";
     }
 
-
+    /**
+     * 编辑商品页面跳转
+     *
+     * @param itemsId 商品信息
+     * @param model 模型
+     * @return 编辑商品页面
+     */
     @RequestMapping("/editItemsInit")
     public String editItemsInit(Long itemsId, Model model) throws Exception {
         ItemsDto itemsDto = itemsService.findItemsById(itemsId);
@@ -59,6 +82,12 @@ public class ItemsController {
         return "editItem";
     }
 
+    /**
+     * 编辑商品
+     *
+     * @param itemsDto 商品信息
+     * @return 跳转列表页面
+     */
     @RequestMapping("/editItems")
     public String editItems(ItemsDto itemsDto) throws Exception {
         itemsService.editItems(itemsDto);

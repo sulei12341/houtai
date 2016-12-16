@@ -1,6 +1,6 @@
 package code.tianmao.h5.dto;
 
-import code.tianmao.h5.domain.Permission;
+import code.tianmao.h5.domain.sys.Permission;
 
 import java.util.List;
 

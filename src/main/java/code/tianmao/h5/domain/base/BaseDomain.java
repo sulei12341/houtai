@@ -1,4 +1,4 @@
-package code.tianmao.h5.domain;
+package code.tianmao.h5.domain.base;
 /*
  * Copyright 2016-2017 the original author or authors.
  *

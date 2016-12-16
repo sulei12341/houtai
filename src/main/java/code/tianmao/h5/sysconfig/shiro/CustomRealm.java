@@ -1,6 +1,6 @@
 package code.tianmao.h5.sysconfig.shiro;
 
-import code.tianmao.h5.domain.Permission;
+import code.tianmao.h5.domain.sys.Permission;
 import code.tianmao.h5.dto.PermissionDto;
 import code.tianmao.h5.dto.UserDto;
 import code.tianmao.h5.service.MemberService;

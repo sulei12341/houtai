@@ -1,6 +1,6 @@
 package code.tianmao.h5.sysconfig.mybatis.Interceptor;
 
-import code.tianmao.h5.domain.Member;
+import code.tianmao.h5.domain.business.Member;
 import code.tianmao.h5.sysconfig.mybatis.annotation.CreatedBy;
 import code.tianmao.h5.sysconfig.mybatis.annotation.CreatedDate;
 import code.tianmao.h5.sysconfig.mybatis.annotation.LastModifiedBy;

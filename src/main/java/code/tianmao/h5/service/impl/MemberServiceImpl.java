@@ -2,8 +2,8 @@ package code.tianmao.h5.service.impl;
 
 import code.tianmao.h5.dao.MemberDao;
 import code.tianmao.h5.dao.PermissionDao;
-import code.tianmao.h5.domain.Member;
-import code.tianmao.h5.domain.Permission;
+import code.tianmao.h5.domain.business.Member;
+import code.tianmao.h5.domain.sys.Permission;
 import code.tianmao.h5.dto.MemberDto;
 import code.tianmao.h5.dto.queryDto.MemberQueryDto;
 import code.tianmao.h5.service.MemberService;

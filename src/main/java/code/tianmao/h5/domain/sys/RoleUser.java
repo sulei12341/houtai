@@ -1,9 +1,11 @@
-package code.tianmao.h5.domain;
+package code.tianmao.h5.domain.sys;
+
+import code.tianmao.h5.domain.base.BaseDomain;
 
 import javax.persistence.Table;
 
 @Table(name = "sys_role_user")
-public class RoleUser extends BaseDomain<Long, Long>  {
+public class RoleUser extends BaseDomain<Long, Long> {
 
     private static final long serialVersionUID = -5524312912380869754L;
 

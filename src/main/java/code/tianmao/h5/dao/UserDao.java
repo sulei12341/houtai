@@ -1,6 +1,6 @@
 package code.tianmao.h5.dao;
 
-import code.tianmao.h5.domain.User;
+import code.tianmao.h5.domain.sys.User;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
@@ -9,6 +9,12 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface UserDao extends Mapper<User> {
 
+    /**
+     * 根据用户名查询会员
+     *
+     * @param username 会员名称
+     * @return 会员信息
+     */
     User findUserByUsername(String username);
 
 }

@@ -2,8 +2,8 @@ package code.tianmao.h5.service.impl;
 
 import code.tianmao.h5.dao.PermissionDao;
 import code.tianmao.h5.dao.UserDao;
-import code.tianmao.h5.domain.Permission;
-import code.tianmao.h5.domain.User;
+import code.tianmao.h5.domain.sys.Permission;
+import code.tianmao.h5.domain.sys.User;
 import code.tianmao.h5.dto.PermissionDto;
 import code.tianmao.h5.dto.UserDto;
 import code.tianmao.h5.service.UserService;

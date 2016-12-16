@@ -1,7 +1,7 @@
 package code.tianmao.h5.sysconfig.exception;
 
 
-import code.tianmao.h5.domain.User;
+import code.tianmao.h5.domain.sys.User;
 import code.tianmao.h5.dto.UserDto;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.UnauthorizedException;

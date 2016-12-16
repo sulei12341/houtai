@@ -26,6 +26,12 @@ public interface UserService {
      */
     List<PermissionDto> findMenuListByUserId(Long userId);
 
+    /**
+     * 根据用户ID查询用户拥有的权限
+     *
+     * @param userId 用户ID
+     * @return 权限列表
+     */
     List<PermissionDto> findPermissionListByUserId(Long userId) throws Exception;
 
 

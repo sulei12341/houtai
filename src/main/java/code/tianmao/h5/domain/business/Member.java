@@ -1,4 +1,6 @@
-package code.tianmao.h5.domain;
+package code.tianmao.h5.domain.business;
+
+import code.tianmao.h5.domain.base.BaseDomain;
 
 import javax.persistence.Table;
 

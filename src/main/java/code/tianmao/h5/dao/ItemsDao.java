@@ -1,6 +1,6 @@
 package code.tianmao.h5.dao;
 
-import code.tianmao.h5.domain.Items;
+import code.tianmao.h5.domain.business.Items;
 import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.sysconfig.mybatis.mapper.ExpandMapper;
 

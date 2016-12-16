@@ -20,7 +20,12 @@ public class MemberLoginController {
         return "member/login";
     }
 
-    //登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致
+    /**
+     * 登陆提交地址，和applicationContext-shiro.xml中配置的loginurl一致
+     *
+     * @param request 请求参数
+     * @return 没有登录的跳转地址
+     */
     @RequestMapping("/login")
     public String login(HttpServletRequest request)throws Exception{
 

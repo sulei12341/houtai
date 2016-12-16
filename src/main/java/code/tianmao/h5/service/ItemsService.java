@@ -19,13 +19,34 @@ public interface ItemsService {
 	
 	//删除商品信息
 	public void deleleItems(Integer id) throws Exception;
-	
-	//商品查询列表
+
+	/**
+	 * 查询商品列表
+	 *
+	 * @param itemQueryDto 查询条件
+	 * @return 分页结果
+     */
 	PageResultVo<ItemsDto> findItemsPage(ItemsQueryDto itemQueryDto) throws Exception;
-	
+
+	/**
+	 * 新增商品
+	 *
+	 * @param itemsDto 商品信息
+     */
 	void addItems(ItemsDto itemsDto);
 
+	/**
+	 * 编辑商品
+	 *
+	 * @param itemsDto 商品信息
+     */
 	void editItems(ItemsDto itemsDto) throws BusinessException;
 
+	/**
+	 * 查询商品信息
+	 *
+	 * @param itemsId 商品ID
+	 * @return  商品信息
+     */
 	ItemsDto findItemsById(Long itemsId);
 }

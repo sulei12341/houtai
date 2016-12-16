@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/index")
-    public String memberCenter(Model model)throws Exception{
-        return "index";
-    }
-
-    //系统首页
+    /**
+     * 跳转系统首页
+     *
+     * @param model 模型
+     * @return 跳转页面
+     */
     @RequestMapping("/first")
     public String first(Model model)throws Exception{
 

@@ -1,4 +1,6 @@
-package code.tianmao.h5.domain;
+package code.tianmao.h5.domain.sys;
+
+import code.tianmao.h5.domain.base.BaseDomain;
 
 import javax.persistence.Table;
 
@@ -7,7 +9,7 @@ import javax.persistence.Table;
  * @date 2016/11/21
  */
 @Table(name = "sys_user")
-public class User extends BaseDomain<Long, Long>  {
+public class User extends BaseDomain<Long, Long> {
 
     private static final long serialVersionUID = -5524308939380869754L;
 
