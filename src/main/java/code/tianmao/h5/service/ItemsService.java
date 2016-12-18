@@ -5,6 +5,7 @@ import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.dto.queryDto.ItemsQueryDto;
 import code.tianmao.h5.sysconfig.exception.BusinessException;
 import code.tianmao.h5.sysconfig.mybatis.Page.PageResultVo;
+import code.tianmao.h5.sysconfig.mybatis.Page.PageModel;
 
 /**
  * 
@@ -26,14 +27,14 @@ public interface ItemsService {
 	 * @param itemQueryDto 查询条件
 	 * @return 分页结果
      */
-	PageResultVo<ItemsDto> findItemsPage(ItemsQueryDto itemQueryDto) throws Exception;
+	PageResultVo findItemsPage(ItemsQueryDto itemQueryDto, PageModel pageModel) throws Exception;
 
 	/**
 	 * 新增商品
 	 *
 	 * @param itemsDto 商品信息
      */
-	void addItems(ItemsDto itemsDto);
+	void addItems(ItemsDto itemsDto) throws BusinessException;
 
 	/**
 	 * 编辑商品

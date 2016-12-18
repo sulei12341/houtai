@@ -4,6 +4,7 @@ import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.dto.queryDto.ItemsQueryDto;
 import code.tianmao.h5.service.ItemsService;
 import code.tianmao.h5.sysconfig.mybatis.Page.PageResultVo;
+import code.tianmao.h5.sysconfig.mybatis.Page.PageModel;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,15 +26,15 @@ public class ItemsController {
     /**
      * 查询商品列表
      *
-     * @param itemsQueryDto 查询条件
+//     * @param itemsQueryDto 查询条件
      * @param model 模型
      * @return 返回结果
      */
     @RequestMapping("/findItemsPage")
     @RequiresPermissions("item:query")//执行queryItems需要"item:query"权限
-    public String findItemsPage(ItemsQueryDto itemsQueryDto, Model model) throws Exception {
+    public String findItemsPage(ItemsQueryDto itemsQueryDto, PageModel pageModel, Model model) throws Exception {
         //调用service查询商品列表
-        PageResultVo<ItemsDto> itemsPage = itemsService.findItemsPage(itemsQueryDto);
+        PageResultVo<ItemsDto> itemsPage = itemsService.findItemsPage(itemsQueryDto, pageModel);
 
         model.addAttribute("itemsList", itemsPage.getList());
 
@@ -52,6 +53,7 @@ public class ItemsController {
      * @return 新增页面
      */
     @RequestMapping("/addItemsInit")
+    @RequiresPermissions("item:create")//执行queryItems需要"item:query"权限
     public String addItemsInit() throws Exception {
         return "editItem";
     }

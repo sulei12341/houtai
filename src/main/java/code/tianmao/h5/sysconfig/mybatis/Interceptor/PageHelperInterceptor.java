@@ -40,7 +40,7 @@ public class PageHelperInterceptor implements HandlerInterceptor {
      * @return
      */
     private int getPageNum(HttpServletRequest request) {
-        int pageNum = 1;
+        int pageNum = 0;
         try {
             String pageNums = request.getParameter("pageNum");
             if (pageNums != null && StringUtilPlus.isNumeric(pageNums)) {

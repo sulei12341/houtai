@@ -7,11 +7,14 @@ import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.dto.queryDto.ItemsQueryDto;
 import code.tianmao.h5.service.ItemsService;
 import code.tianmao.h5.sysconfig.exception.BusinessException;
+import code.tianmao.h5.sysconfig.mybatis.Page.PageModel;
 import code.tianmao.h5.sysconfig.mybatis.Page.PageResultVo;
 import code.tianmao.h5.utils.BeanUtilPlus;
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ItemsServiceImpl implements ItemsService {
@@ -26,20 +29,30 @@ public class ItemsServiceImpl implements ItemsService {
 
 	//商品查询列表
 	@Override
-	public PageResultVo<ItemsDto> findItemsPage(ItemsQueryDto itemQueryDto) throws Exception {
+	public PageResultVo findItemsPage(ItemsQueryDto itemQueryDto, PageModel pageModel) throws Exception {
         Items items = BeanUtilPlus.copyAs(itemQueryDto, Items.class);
-        Page<ItemsDto> itemsDtos = itemsDao.selectPage(items);
-        return new PageResultVo<ItemsDto>(itemsDtos);
+        PageHelper.startPage(pageModel.getPage(),pageModel.getPageSize());
+        Page<Items> itemses = itemsDao.selectPage(items);
+        return new PageResultVo<Items>(itemses);
 	}
 
 	@Override
-	public void addItems(ItemsDto itemsDto) {
+    @Transactional(rollbackFor = BusinessException.class)
+	public void addItems(ItemsDto itemsDto) throws BusinessException {
+        Items item = new Items();
+        item.setName("lllllll");
+        item.setPrice(11F);
+        itemsDao.insert(item);
+
 		Items items = BeanUtilPlus.copyAs(itemsDto, Items.class);
-		itemsDao.insert(items);
+//        throw new BusinessException("产品不存在");
+
+        itemsDao.insert(items);
 	}
 
 	@Override
-	public void editItems(ItemsDto itemsDto) throws BusinessException {
+    @Transactional(rollbackFor = BusinessException.class)
+    public void editItems(ItemsDto itemsDto) throws BusinessException {
         Items items = itemsDao.selectByPrimaryKey(itemsDto.getId());
         if(items == null){
             throw new BusinessException("产品不存在");

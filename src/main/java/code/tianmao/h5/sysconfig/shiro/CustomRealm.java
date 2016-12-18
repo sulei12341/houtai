@@ -50,60 +50,6 @@ public class CustomRealm extends AuthorizingRealm {
         super.setName("customRealm");
     }
 
-    // 用于认证
-    //没有连接数据库的方法
-    /*@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(
-			AuthenticationToken token) throws AuthenticationException {
-		
-		// token是用户输入的用户名和密码 
-		// 第一步从token中取出用户名
-		String userCode = (String) token.getPrincipal();
-
-		// 第二步：根据用户输入的userCode从数据库查询
-		// ....
-	
-
-		// 如果查询不到返回null
-		//数据库中用户账号是zhangsansan
-		if(!userCode.equals("zhangsansan")){//
-			return null;
-		}
-		
-		
-		// 模拟从数据库查询到密码
-		String password = "111111";
-
-		// 如果查询到返回认证信息AuthenticationInfo
-		
-		//activeUser就是用户身份信息
-		ActiveUser activeUser = new ActiveUser();
-		
-		activeUser.setUserid("zhangsan");
-		activeUser.setUsercode("zhangsan");
-		activeUser.setUsername("张三");
-		//..
-		
-		//根据用户id取出菜单
-		//通过service取出菜单 
-		List<Permission> menus  = null;
-		try {
-			menus = sysService.findMenuListByUserId("zhangsan");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//将用户菜单 设置到activeUser
-		activeUser.setMenus(menus);
-		
-		
-		//将activeUser设置simpleAuthenticationInfo
-		SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
-				activeUser, password, this.getName());
-
-		return simpleAuthenticationInfo;
-	}*/
-
     //realm的认证方法，从数据库查询用户信息
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
@@ -131,15 +77,6 @@ public class CustomRealm extends AuthorizingRealm {
         //盐
         String salt = userDto.getSalt();
 
-        // 如果查询到返回认证信息AuthenticationInfo
-
-        //activeUser就是用户身份信息
-/*		ActiveUser activeUser = new ActiveUser();
-		
-		activeUser.setUserid(sysUser.getId());
-		activeUser.setUsercode(sysUser.getUsercode());
-		activeUser.setUsername(sysUser.getUsername());*/
-        //..
 
         //根据用户id取出菜单
         List<Permission> menus = null;
@@ -185,14 +122,6 @@ public class CustomRealm extends AuthorizingRealm {
                 permissions.add(permissionDto.getPercode());
             }
         }
-		
-		
-	/*	List<String> permissions = new ArrayList<String>();
-		permissions.add("user:create");//用户的创建
-		permissions.add("item:query");//商品查询权限
-		permissions.add("item:add");//商品添加权限
-		permissions.add("item:edit");//商品修改权限
-*/        //....
 
         //查到权限数据，返回授权信息(要包括 上边的permissions)
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();

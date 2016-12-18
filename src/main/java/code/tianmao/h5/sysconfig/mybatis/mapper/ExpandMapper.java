@@ -7,5 +7,5 @@ import tk.mybatis.mapper.common.Mapper;
  * @date 2016/12/15
  */
 
-public interface ExpandMapper<T, D> extends SelectPageMapper<T, D>, Mapper<T> {
+public interface ExpandMapper<T> extends SelectPageMapper<T>, Mapper<T> {
 }
