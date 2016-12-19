@@ -3,8 +3,8 @@ package code.tianmao.h5.controller.items;
 import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.dto.queryDto.ItemsQueryDto;
 import code.tianmao.h5.service.ItemsService;
-import code.tianmao.h5.sysconfig.mybatis.Page.PageResultVo;
 import code.tianmao.h5.sysconfig.mybatis.Page.PageModel;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +32,10 @@ public class ItemsController {
      * @return 返回结果
      */
     @RequestMapping("/findItemsPage")
-    @RequiresPermissions("item:query")//执行queryItems需要"item:query"权限
+//    @RequiresPermissions("item:query")//执行queryItems需要"item:query"权限
     public String findItemsPage(ItemsQueryDto itemsQueryDto, PageModel pageModel, Model model) throws Exception {
         //调用service查询商品列表
-        PageResultVo<ItemsDto> itemsPage = itemsService.findItemsPage(itemsQueryDto, pageModel);
-
+        PageInfo<ItemsDto> itemsPage = itemsService.findItemsPage(itemsQueryDto, pageModel);
         model.addAttribute("itemsList", itemsPage.getList());
 
         HashMap<String, String> itemsType = new HashMap<String, String>();

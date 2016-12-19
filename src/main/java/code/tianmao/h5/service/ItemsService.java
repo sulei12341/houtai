@@ -4,8 +4,8 @@ package code.tianmao.h5.service;
 import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.dto.queryDto.ItemsQueryDto;
 import code.tianmao.h5.sysconfig.exception.BusinessException;
-import code.tianmao.h5.sysconfig.mybatis.Page.PageResultVo;
 import code.tianmao.h5.sysconfig.mybatis.Page.PageModel;
+import com.github.pagehelper.PageInfo;
 
 /**
  * 
@@ -27,7 +27,7 @@ public interface ItemsService {
 	 * @param itemQueryDto 查询条件
 	 * @return 分页结果
      */
-	PageResultVo findItemsPage(ItemsQueryDto itemQueryDto, PageModel pageModel) throws Exception;
+	PageInfo<ItemsDto> findItemsPage(ItemsQueryDto itemQueryDto, PageModel pageModel) throws Exception;
 
 	/**
 	 * 新增商品

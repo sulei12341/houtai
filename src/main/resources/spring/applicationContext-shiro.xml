@@ -40,6 +40,8 @@
                 /styles/** = anon
                 <!-- 验证码，可匿名访问 -->
                 /validatecode.jsp = anon
+                /items/** = anon
+
                 <!--/items/** = anon-->
                 <!-- 请求 logout.action地址，shiro去清除session-->
                 /logout.action = logout
@@ -51,7 +53,6 @@
                 /first = user
                 /welcome= user
 
-                /items/** = user
 
                 <!-- /** = authc 所有url都必须认证通过才可以访问-->
                 /** = authc

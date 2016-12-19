@@ -2,19 +2,22 @@ package code.tianmao.h5.service.impl;
 
 
 import code.tianmao.h5.dao.ItemsDao;
+import code.tianmao.h5.dao.query.ItemsExample;
 import code.tianmao.h5.domain.business.Items;
 import code.tianmao.h5.dto.ItemsDto;
 import code.tianmao.h5.dto.queryDto.ItemsQueryDto;
 import code.tianmao.h5.service.ItemsService;
 import code.tianmao.h5.sysconfig.exception.BusinessException;
 import code.tianmao.h5.sysconfig.mybatis.Page.PageModel;
-import code.tianmao.h5.sysconfig.mybatis.Page.PageResultVo;
 import code.tianmao.h5.utils.BeanUtilPlus;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ItemsServiceImpl implements ItemsService {
@@ -29,11 +32,21 @@ public class ItemsServiceImpl implements ItemsService {
 
 	//商品查询列表
 	@Override
-	public PageResultVo findItemsPage(ItemsQueryDto itemQueryDto, PageModel pageModel) throws Exception {
-        Items items = BeanUtilPlus.copyAs(itemQueryDto, Items.class);
-        PageHelper.startPage(pageModel.getPage(),pageModel.getPageSize());
-        Page<Items> itemses = itemsDao.selectPage(items);
-        return new PageResultVo<Items>(itemses);
+	public PageInfo<ItemsDto> findItemsPage(ItemsQueryDto itemQueryDto, PageModel pageModel) throws Exception {
+//        Items items = BeanUtilPlus.copyAs(itemQueryDto, Items.class);
+//        example.orderBy("itemsCode").asc();
+        Example example = ItemsExample.getExample(itemQueryDto, pageModel);
+        List<Items> itemsList = itemsDao.selectByExample(example);
+        List<ItemsDto> itemsDtoList = new ArrayList<>();
+        for (Items items : itemsList  ) {
+            ItemsDto itemsDto = BeanUtilPlus.copyAs(items, ItemsDto.class);
+            itemsDtoList.add(itemsDto);
+        }
+        //TODO 留作备份
+        //       Page<Items> itemses = itemsDao.selectPage(items);
+        //        return new PageResultVo<Items>(itemses);
+
+        return new PageInfo(itemsDtoList);
 	}
 
 	@Override
