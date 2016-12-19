@@ -17,7 +17,8 @@ import java.util.HashMap;
  * @author Junpeng.Su
  * @date 2016/12/13
  */
-@Controller
+@Controller()
+@RequestMapping("/items")
 public class ItemsController {
 
     @Resource
@@ -26,8 +27,8 @@ public class ItemsController {
     /**
      * 查询商品列表
      *
-//     * @param itemsQueryDto 查询条件
-     * @param model 模型
+     * @param itemsQueryDto 查询条件
+     * @param model         模型
      * @return 返回结果
      */
     @RequestMapping("/findItemsPage")
@@ -74,13 +75,13 @@ public class ItemsController {
      * 编辑商品页面跳转
      *
      * @param itemsId 商品信息
-     * @param model 模型
+     * @param model   模型
      * @return 编辑商品页面
      */
     @RequestMapping("/editItemsInit")
     public String editItemsInit(Long itemsId, Model model) throws Exception {
         ItemsDto itemsDto = itemsService.findItemsById(itemsId);
-        model.addAttribute("itemsDto",itemsDto);
+        model.addAttribute("itemsDto", itemsDto);
         return "editItem";
     }
 
@@ -95,7 +96,6 @@ public class ItemsController {
         itemsService.editItems(itemsDto);
         return "itemsList";
     }
-
 
 
 }

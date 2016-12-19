@@ -25,8 +25,8 @@ function deleteItems(){
 <c:if test="${usercode!=null }">
 	<a href="${pageContext.request.contextPath }/logout.action">退出</a>
 </c:if>
-<a href="${pageContext.request.contextPath }/addItemsInit">新增商品</a>
-<form name="itemsForm" action="${pageContext.request.contextPath }/findItemsPage" method="post">
+<a href="${pageContext.request.contextPath }/items/addItemsInit">新增商品</a>
+<form name="itemsForm" action="${pageContext.request.contextPath }/items/findItemsPage" method="post">
 查询条件：
 <table width="100%" border=1>
 <tr>
@@ -72,7 +72,7 @@ function deleteItems(){
 	</shiro:hasPermission>
 	</td>
 	<td><a href="${pageContext.request.contextPath }/items/viewItems/${item.id}">商品查看</a>
-		<a href="${pageContext.request.contextPath }/editItemsInit?itemsId=${item.id}">修改</a>
+		<a href="${pageContext.request.contextPath }/items/editItemsInit?itemsId=${item.id}">修改</a>
 	</td>
 
 </tr>

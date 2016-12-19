@@ -11,11 +11,11 @@
 </head>
 <c:choose>
     <c:when test="${empty itemsDto.id}">
-        <c:set var="PATH_SUBMIT_URL" value="${pageContext.request.contextPath }/addItems"/>
+        <c:set var="PATH_SUBMIT_URL" value="${pageContext.request.contextPath }/items/addItems"/>
         <c:set var="METHOD" value="POST"/>
     </c:when>
     <c:otherwise>
-        <c:set var="PATH_SUBMIT_URL" value="${pageContext.request.contextPath }/editItems"/>
+        <c:set var="PATH_SUBMIT_URL" value="${pageContext.request.contextPath }/items/editItems"/>
         <c:set var="METHOD" value="PUT"/>
     </c:otherwise>
 </c:choose>
